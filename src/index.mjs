@@ -122,7 +122,7 @@ bot.on(message('text'), async (ctx) => {
     content: completionAnswer
   })
 
-  await ctx.reply( completionAnswer)
+  await ctx.reply(completionAnswer)
 })
 
 bot.on(message('voice'), async (ctx) => {
