@@ -89,7 +89,7 @@ bot.command('code', async (ctx) => {
     content: completionAnswer
   })
 
-  await ctx.reply( completionAnswer)
+  await ctx.reply(completionAnswer)
 })
 
 bot.command('image', async (ctx) => {
