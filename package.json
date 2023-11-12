@@ -6,7 +6,7 @@
     "start": "node --env-file=.env index.mjs --watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "Robert Soriano",
   "license": "ISC",
   "dependencies": {
     "openai": "^4.17.4",
