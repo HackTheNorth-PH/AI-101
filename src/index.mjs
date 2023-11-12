@@ -132,15 +132,16 @@ bot.on(message('voice'), async (ctx) => {
   }
 
   const fileLink = await ctx.telegram.getFileLink(fileId)
+  const filePath = `tmp/voice_note_${fileId}.ogg`
+  await download(fileLink.href, filePath)
 
-  await download(fileLink.href, `voice_note_${fileId}.ogg`)
   await ctx.reply('Voice note downloaded, transcribing now')
-
+  
   const transcript = await openai.audio.transcriptions.create({
     model: 'whisper-1',
-    file: fs.createReadStream(`voice_note_${fileId}.ogg`)
+    file: fs.createReadStream(filePath)
   })
-  
+
   await ctx.reply(transcript.text)
 })
 
