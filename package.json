@@ -5,6 +5,9 @@
   "scripts": {
     "start": "node --env-file=.env index.mjs --watch"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "keywords": [],
   "author": "Robert Soriano",
   "license": "ISC",
