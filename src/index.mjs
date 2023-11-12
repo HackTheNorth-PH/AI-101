@@ -109,6 +109,8 @@ bot.on(message('text'), async (ctx) => {
     content: ctx.message.text,
   })
 
+  await ctx.sendChatAction('typing')
+
   const completion = await openai.chat.completions.create({
     messages,
     model: 'gpt-3.5-turbo',
