@@ -70,7 +70,7 @@ const messages = [
 ]
 
 bot.command('start', async (ctx) => {
-  await ctx.telegram.sendMessage(ctx.message.chat.id, "I'm a bot, please talk to me")
+  await ctx.reply(ctx.message.chat.id, "I'm a bot, please talk to me")
 })
 
 bot.command('code', async (ctx) => {
@@ -89,7 +89,7 @@ bot.command('code', async (ctx) => {
     content: completionAnswer
   })
 
-  await ctx.telegram.sendMessage(ctx.message.chat.id, completionAnswer)
+  await ctx.reply(ctx.message.chat.id, completionAnswer)
 })
 
 bot.command('image', async (ctx) => {
@@ -102,7 +102,7 @@ bot.command('image', async (ctx) => {
 
   const imageUrl = response.data[0].url
 
-  await ctx.telegram.sendPhoto(ctx.message.chat.id, imageUrl)
+  await ctx.sendPhoto(ctx.message.chat.id, imageUrl)
 })
 
 bot.on(message('text'), async (ctx) => {
@@ -121,7 +121,7 @@ bot.on(message('text'), async (ctx) => {
     content: completionAnswer
   })
 
-  await ctx.telegram.sendMessage(ctx.message.chat.id, completionAnswer)
+  await ctx.reply(ctx.message.chat.id, completionAnswer)
 })
 
 bot.on(message('voice'), async (ctx) => {
