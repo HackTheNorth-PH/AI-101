@@ -102,10 +102,10 @@ bot.command('image', async (ctx) => {
 
   const imageUrl = response.data[0].url
 
-  await ctx.sendPhoto( imageUrl)
+  await ctx.replyWithPhoto(imageUrl)
 })
 
-bot.on(message('text'), async (ctx) => {
+bot.on(message('text'), async (ctx) => { 
   messages.push({
     role: 'user',
     content: ctx.message.text,
