@@ -3,7 +3,7 @@
   "type": "module",
   "main": "index.mjs",
   "scripts": {
-    "start": "node --env-file=.env index.mjs --watch"
+    "start": "node --env-file=.env src/index.mjs --watch"
   },
   "engines": {
     "node": ">=20"
