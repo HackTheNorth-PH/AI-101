@@ -1,5 +1,5 @@
-import { Telegraf } from 'telegraf'
-import OpenAI from 'openai'
+import { Input, Telegraf } from 'telegraf'
+import OpenAI, { toFile } from 'openai'
 import { message } from 'telegraf/filters'
 
 const openai = new OpenAI({
@@ -101,6 +101,17 @@ bot.command('image', async (ctx) => {
   const imageUrl = response.data[0].url
 
   await ctx.replyWithPhoto(imageUrl)
+})
+
+bot.command('speak', async (ctx) => {
+  const resp = await openai.audio.speech.create({
+    model: 'tts-1',
+    voice: 'alloy',
+    input: ctx.message.text.replace('/speak', ''),
+  })
+  const arrayBuffer = await resp.arrayBuffer()
+
+  await ctx.replyWithAudio(Input.fromBuffer(Buffer.from(arrayBuffer)))
 })
 
 bot.on(message('text'), async (ctx) => { 
