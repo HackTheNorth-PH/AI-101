@@ -1,7 +1,5 @@
 import { Telegraf } from 'telegraf'
-import OpenAI from 'openai'
-import { download } from './download.mjs'
-import fs from 'fs'
+import OpenAI, { toFile } from 'openai'
 import { message } from 'telegraf/filters'
 
 const openai = new OpenAI({
@@ -135,14 +133,15 @@ bot.on(message('voice'), async (ctx) => {
   }
 
   const fileLink = await ctx.telegram.getFileLink(fileId)
-  const filePath = `voice_note_${fileId}.ogg`
-  await download(fileLink.href, filePath)
+  
+  const response = await fetch(fileLink.href)
+  const arrayBuffer = await response.arrayBuffer()
 
   await ctx.reply('Voice note downloaded, transcribing now')
   
   const transcript = await openai.audio.transcriptions.create({
     model: 'whisper-1',
-    file: fs.createReadStream(filePath)
+    file: await toFile(Buffer.from(arrayBuffer), `voice-${fileId}.ogg`)
   })
 
   await ctx.reply(transcript.text)
