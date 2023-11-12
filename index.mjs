@@ -1,17 +1,13 @@
-import OpenAI from 'openai'
 import { Telegraf } from 'telegraf'
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-})
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN)
 
-async function main() {
-  const chatCompletion = await openai.chat.completions.create({
-    messages: [{ role: 'user', content: 'Say this is a test' }],
-    model: 'gpt-3.5-turbo',
-  })
-}
+bot.command('start', async (ctx) => {
+  await ctx.telegram.sendMessage(ctx.message.chat.id, "I'm a bot, please talk to me")
+})
 
-main()
+bot.launch()
+
+// Enable graceful stop
+process.once('SIGINT', () => bot.stop('SIGINT'))
+process.once('SIGTERM', () => bot.stop('SIGTERM'))
