@@ -16,7 +16,7 @@ const messages = [
 ]
 
 bot.command('start', async (ctx) => {
-  await ctx.telegram.sendMessage(ctx.message.chat.id, "I'm a bot, please talk to me")
+  await ctx.reply("I'm a bot, please talk to me")
 })
 
 bot.on(message('text'), async (ctx) => {
@@ -36,7 +36,7 @@ bot.on(message('text'), async (ctx) => {
     content: completionAnswer
   })
 
-  await ctx.telegram.sendMessage(ctx.message.chat.id, completionAnswer)
+  await ctx.reply(completionAnswer)
 })
 
 bot.launch()
