@@ -100,7 +100,7 @@ bot.command('image', async (ctx) => {
 
   const imageUrl = response.data[0].url
 
-  await ctx.telegram.sendPhoto(ctx.message.chat.id, imageUrl)
+  await ctx.replyWithPhoto(imageUrl)
 })
 
 bot.on(message('text'), async (ctx) => {
