@@ -103,11 +103,11 @@ bot.command('image', async (ctx) => {
   await ctx.replyWithPhoto(imageUrl)
 })
 
-bot.command('speak', async (ctx) => {
+bot.command('tts', async (ctx) => {
   const resp = await openai.audio.speech.create({
     model: 'tts-1',
     voice: 'alloy',
-    input: ctx.message.text.replace('/speak', ''),
+    input: ctx.message.text.replace('/tts', ''),
   })
   const arrayBuffer = await resp.arrayBuffer()
 
