@@ -132,7 +132,7 @@ bot.on(message('voice'), async (ctx) => {
   }
 
   const fileLink = await ctx.telegram.getFileLink(fileId)
-  const filePath = `tmp/voice_note_${fileId}.ogg`
+  const filePath = `voice_note_${fileId}.ogg`
   await download(fileLink.href, filePath)
 
   await ctx.reply('Voice note downloaded, transcribing now')
