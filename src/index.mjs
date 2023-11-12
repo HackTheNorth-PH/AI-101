@@ -1,5 +1,5 @@
 import { Input, Telegraf } from 'telegraf'
-import OpenAI, { toFile } from 'openai'
+import OpenAI from 'openai'
 import { message } from 'telegraf/filters'
 
 const openai = new OpenAI({
