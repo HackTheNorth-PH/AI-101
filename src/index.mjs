@@ -68,7 +68,7 @@ const messages = [
 ]
 
 bot.command('start', async (ctx) => {
-  await ctx.reply(ctx.message.chat.id, "I'm a bot, please talk to me")
+  await ctx.reply("I'm a bot, please talk to me")
 })
 
 bot.command('code', async (ctx) => {
