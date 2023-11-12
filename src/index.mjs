@@ -3,7 +3,7 @@ import { Telegraf } from 'telegraf'
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN)
 
 bot.command('start', async (ctx) => {
-  await ctx.telegram.sendMessage(ctx.message.chat.id, "I'm a bot, please talk to me")
+  await ctx.reply("I'm a bot, please talk to me")
 })
 
 bot.launch()
