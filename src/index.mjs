@@ -71,7 +71,7 @@ bot.command('start', async (ctx) => {
   await ctx.telegram.sendMessage(ctx.message.chat.id, "I'm a bot, please talk to me")
 })
 
-bot.on(message('text'), async (ctx) => {
+bot.command('code', async (ctx) => {
   messages.push({
     role: 'user',
     content: ctx.message.text,
@@ -79,7 +79,7 @@ bot.on(message('text'), async (ctx) => {
 
   const completion = await openai.chat.completions.create({
     messages,
-    model: 'gpt-3.5-turbo'
+    model: 'gpt-4'
   })
   const completionAnswer = completion.choices[0].message.content
   messages.push({
@@ -90,7 +90,20 @@ bot.on(message('text'), async (ctx) => {
   await ctx.telegram.sendMessage(ctx.message.chat.id, completionAnswer)
 })
 
-bot.command('code', async (ctx) => {
+bot.command('image', async (ctx) => {
+  const response = await openai.images.generate({
+    prompt: ctx.message.text,
+    n: 1,
+    size: '1024x1024',
+    model: 'dall-e-3'
+  })
+
+  const imageUrl = response.data[0].url
+
+  await ctx.telegram.sendPhoto(ctx.message.chat.id, imageUrl)
+})
+
+bot.on(message('text'), async (ctx) => {
   messages.push({
     role: 'user',
     content: ctx.message.text,
@@ -98,7 +111,7 @@ bot.command('code', async (ctx) => {
 
   const completion = await openai.chat.completions.create({
     messages,
-    model: 'gpt-4'
+    model: 'gpt-3.5-turbo'
   })
   const completionAnswer = completion.choices[0].message.content
   messages.push({
