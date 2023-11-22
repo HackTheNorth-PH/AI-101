@@ -155,6 +155,36 @@ bot.on(message('voice'), async (ctx) => {
   await ctx.reply(transcript.text)
 })
 
+bot.on(message('photo'), async (ctx) => {
+  const { file_id: fileId } = ctx.message.photo[0]
+
+  const fileLink = await ctx.telegram.getFileLink(fileId)
+
+  const completion = await openai.chat.completions.create({
+    messages: [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: 'Describe this image:'
+          },
+          {
+            type: 'image_url',
+            image_url: fileLink.href
+          }
+        ]
+      }
+    ],
+    model: 'gpt-4-vision-preview',
+    max_tokens: 300
+  })
+
+  const completionAnswer = completion.choices[0].message.content
+
+  await ctx.reply(completionAnswer)
+})
+
 bot.launch()
 
 // Enable graceful stop
