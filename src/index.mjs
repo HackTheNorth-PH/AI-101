@@ -167,7 +167,7 @@ bot.on(message('photo'), async (ctx) => {
         content: [
           {
             type: 'text',
-            text: 'Describe this image:'
+            text: ctx.message.caption
           },
           {
             type: 'image_url',
