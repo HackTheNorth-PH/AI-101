@@ -128,10 +128,6 @@ bot.on(message('text'), async (ctx) => {
 bot.on(message('voice'), async (ctx) => {
   const fileId = ctx.message.voice.file_id
 
-  if (!fileId) {
-    return;
-  }
-
   const fileLink = await ctx.telegram.getFileLink(fileId)
 
   await ctx.reply('Voice note downloaded, transcribing now')
